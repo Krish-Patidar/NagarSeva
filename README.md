@@ -145,3 +145,10 @@ Create a `.env` file in backend:
 - Multi-language support
 
 ---
+
+## © Copyright Notice
+
+© 2026 Krish Patidar. All Rights Reserved.
+
+This project and its source code are the intellectual property of the author.  
+Unauthorized copying, distribution, modification, or use of this project, in whole or in part, without explicit permission is strictly prohibited.
