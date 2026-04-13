@@ -1,6 +1,6 @@
 import React from 'react';
 import { GlassCard } from '../ui/GlassCard';
-import { formatDate, CATEGORY_LABELS, getImageUrl, timeAgo } from '../../utils/helpers';
+import { CATEGORY_LABELS, getImageUrl, timeAgo } from '../../utils/helpers';
 import { MapPin, Clock, Building2, Tag, AlertCircle, CheckCircle, RefreshCw, XCircle } from 'lucide-react';
 
 const StatusBadge = ({ status }) => {
