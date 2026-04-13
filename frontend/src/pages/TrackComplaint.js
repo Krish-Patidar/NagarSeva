@@ -29,10 +29,6 @@ export default function TrackComplaint() {
   const [filter, setFilter] = useState('all');
 
   useEffect(() => {
-    fetchComplaints();
-  }, [fetchComplaints]);
-
-  useEffect(() => {
     if (id && complaints.length > 0) {
       const found = complaints.find(c => c._id === id);
       if (found) setSelected(found);
@@ -57,6 +53,10 @@ export default function TrackComplaint() {
       setLoading(false);
     }
   };
+
+    useEffect(() => {
+    fetchComplaints();
+  }, [fetchComplaints]);
 
   const filtered = filter === 'all' ? complaints : complaints.filter(c => c.status === filter);
 
