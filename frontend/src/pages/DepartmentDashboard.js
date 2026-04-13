@@ -30,7 +30,7 @@ export default function DepartmentDashboard() {
   const [filter, setFilter] = useState('all');
   const [updateForm, setUpdateForm] = useState({ status: '', assignedTo: '', expense: '', adminNotes: '' });
 
-  const fetchAll = async () => {
+  const fetchAll = useCallback(async => {
     try {
       const [cRes, aRes, wRes] = await Promise.all([
         api.get('/complaints?limit=100'),
@@ -43,7 +43,7 @@ export default function DepartmentDashboard() {
     } catch (err) {
       toast.error('Failed to load data');
     } finally { setLoading(false); }
-  };
+  }, []);
 
     useEffect(() => {
     fetchAll(); 
