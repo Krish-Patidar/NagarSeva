@@ -43,7 +43,7 @@ export default function DepartmentDashboard() {
     } catch (err) {
       toast.error('Failed to load data');
     } finally { setLoading(false); }
-  }, []);
+  }, [user.departmentId]);
 
     useEffect(() => {
     fetchAll(); 
