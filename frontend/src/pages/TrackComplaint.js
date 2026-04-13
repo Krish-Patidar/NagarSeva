@@ -35,7 +35,7 @@ export default function TrackComplaint() {
     }
   }, [id, complaints]);
 
-  const fetchComplaints = async () => {
+  const fetchComplaints = useCallback(async => {
     try {
       const { data } = await api.get('/complaints?limit=50');
       setComplaints(data.complaints);
@@ -52,7 +52,7 @@ export default function TrackComplaint() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
     useEffect(() => {
     fetchComplaints();
