@@ -30,7 +30,9 @@ export default function DepartmentDashboard() {
   const [filter, setFilter] = useState('all');
   const [updateForm, setUpdateForm] = useState({ status: '', assignedTo: '', expense: '', adminNotes: '' });
 
-  useEffect(() => { fetchAll(); }, []);
+  useEffect(() => {
+    fetchAll(); 
+  }, [fetchAll]);
 
   const fetchAll = async () => {
     try {
