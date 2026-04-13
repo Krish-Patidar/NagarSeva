@@ -30,10 +30,6 @@ export default function DepartmentDashboard() {
   const [filter, setFilter] = useState('all');
   const [updateForm, setUpdateForm] = useState({ status: '', assignedTo: '', expense: '', adminNotes: '' });
 
-  useEffect(() => {
-    fetchAll(); 
-  }, [fetchAll]);
-
   const fetchAll = async () => {
     try {
       const [cRes, aRes, wRes] = await Promise.all([
@@ -48,6 +44,10 @@ export default function DepartmentDashboard() {
       toast.error('Failed to load data');
     } finally { setLoading(false); }
   };
+
+    useEffect(() => {
+    fetchAll(); 
+  }, [fetchAll]);
 
   const selectComplaint = (c) => {
     setSelected(c);
