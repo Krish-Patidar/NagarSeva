@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import toast from 'react-hot-toast';
 import api from '../utils/api';
 import { useAuth } from '../context/AuthContext';
@@ -30,7 +30,7 @@ export default function DepartmentDashboard() {
   const [filter, setFilter] = useState('all');
   const [updateForm, setUpdateForm] = useState({ status: '', assignedTo: '', expense: '', adminNotes: '' });
 
-  const fetchAll = useCallback(async => {
+  const fetchAll = useCallback(async () => {
     try {
       const [cRes, aRes, wRes] = await Promise.all([
         api.get('/complaints?limit=100'),
