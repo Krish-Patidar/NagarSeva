@@ -3,19 +3,23 @@ const nodemailer = require('nodemailer');
 const createTransporter = () => {
   return nodemailer.createTransport({
     host: process.env.EMAIL_HOST || 'smtp-relay.brevo.com',
-    port: parseInt(process.env.EMAIL_PORT) || 587,
+    port: parseInt(process.env.EMAIL_PORT, 10) || 587,
     secure: false,
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS
-    }
+    },
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 10000
   });
 };
 
 const sendOTPEmail = async (email, otp, name = 'User') => {
   const transporter = createTransporter();
+
   const mailOptions = {
-    from: `"Grievance Portal" <${process.env.EMAIL_USER}>`,
+    from: `"Grievance Portal" <${process.env.EMAIL_FROM}>`,
     to: email,
     subject: 'Your OTP for Grievance Portal',
     html: `
@@ -38,13 +42,15 @@ const sendOTPEmail = async (email, otp, name = 'User') => {
       </div>
     `
   };
+
+  await transporter.verify();
   await transporter.sendMail(mailOptions);
 };
 
 const sendComplaintSubmittedEmail = async (email, name, complaint) => {
   const transporter = createTransporter();
   const mailOptions = {
-    from: `"Grievance Portal" <${process.env.EMAIL_USER}>`,
+    from: `"Grievance Portal" <${process.env.EMAIL_FROM}>`,
     to: email,
     subject: `Complaint Registered - ${complaint.complaintNumber}`,
     html: `
@@ -81,7 +87,7 @@ const sendComplaintSubmittedEmail = async (email, name, complaint) => {
 const sendComplaintCompletedEmail = async (email, name, complaint) => {
   const transporter = createTransporter();
   const mailOptions = {
-    from: `"Grievance Portal" <${process.env.EMAIL_USER}>`,
+    from: `"Grievance Portal" <${process.env.EMAIL_FROM}>`,
     to: email,
     subject: `Complaint Resolved - ${complaint.complaintNumber}`,
     html: `
